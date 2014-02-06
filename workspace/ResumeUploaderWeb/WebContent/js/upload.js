@@ -38,7 +38,7 @@ function addResume() {
 					var data = new FormData();
 					data.append("file", files[0]);
 					$.ajax({//upload file
-						url : 'jsp/uploadFile.jsp',
+						url : 'controller/uploadFile.jsp',
 						data : data,
 						cache : false,
 						contentType : false,

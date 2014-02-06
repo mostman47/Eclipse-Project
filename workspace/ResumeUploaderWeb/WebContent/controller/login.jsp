@@ -1,7 +1,7 @@
 <%@ page import="java.util.Properties"%>
 <%
 	//System.out.println("login.jsp");
-	String isLogin = (String) session.getAttribute("isLogin");
+	String isLogin = (String) session.getAttribute("user");
 	session.setAttribute("error", null);
 	if ("GET".equalsIgnoreCase(request.getMethod())) {
 		Properties prop = new Properties();
@@ -15,7 +15,7 @@
 		{
 			session.invalidate();
 			session = request.getSession();
-			session.setAttribute("isLogin", user);
+			session.setAttribute("user", user);
 		}
 		else
 		{
@@ -33,5 +33,6 @@
 				System.out.println("logout");
 			};
 		}
+	response.sendRedirect(request.getContextPath() + "/index");
 %>
-<META HTTP-EQUIV=Refresh CONTENT="0; URL=../index.jsp">
+<!-- <META HTTP-EQUIV=Refresh CONTENT="0; URL=../index.jsp"> -->

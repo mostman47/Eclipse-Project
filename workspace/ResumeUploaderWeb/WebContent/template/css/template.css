@@ -6,3 +6,6 @@
 .v-center {
     display:table !important;
 }
+.table td {
+   text-align: center;   
+}

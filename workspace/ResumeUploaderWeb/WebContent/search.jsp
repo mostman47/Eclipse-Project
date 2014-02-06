@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="controller/controller.jsp" %> 
 <%
 //@author: nam phan
 //@company: Reliable{coders}
@@ -7,6 +8,7 @@
 <html lang="en">
 
 <head>
+
 <jsp:include page="template/head.jsp" />
 </head>
 
@@ -28,12 +30,10 @@
 			</div>
 			<div class="row marketing">
 				<div class="col-lg-12">
-					<div class="bs-example">
-						<blockquote>
-						<table id="resultTable" class="table table-hover">
+					<div class="bs-example"> 
+						<table id="resultTable" class="table table-hover table-bordered table-striped">
 
 						</table>
-						</blockquote>
 						<ul id="pager" class="pager">
 							<li id="pagerPrevious"  class="previous disabled"><a href="#" >&larr; Older</a></li>
 							<li id="pagerNext" class="next disabled"><a href="#" >Newer &rarr;</a></li>

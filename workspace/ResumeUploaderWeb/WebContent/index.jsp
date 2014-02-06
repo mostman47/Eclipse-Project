@@ -32,11 +32,11 @@
 		<blockquote>
 			<div class="row">
 				<%
-					String loginUser = (String) session.getAttribute("isLogin");
+					String loginUser = (String) session.getAttribute("user");
 					if (loginUser == null) {
 				%>
 				<div class="col-md-8 col-md-offset-3">
-					<form id="loginForm" class="form-horizontal" action="jsp/login.jsp"
+					<form id="loginForm" class="form-horizontal" action="controller/login.jsp"
 						method="get">
 						<div class="form-group">
 							<div class="col-sm-10">
@@ -91,8 +91,8 @@
 						</h1>
 					</div>
 					<div class="row">
-						<a href="upload.jsp"><button type="button"
-								class="btn btn-success">Upload</button></a> <a href="search.jsp"><button
+						<a href="upload"><button type="button"
+								class="btn btn-success">Upload</button></a> <a href="search"><button
 								type="button" class="btn btn-success">Search</button></a>
 					</div>
 				</div>

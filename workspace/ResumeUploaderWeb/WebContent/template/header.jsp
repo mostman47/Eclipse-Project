@@ -1,9 +1,10 @@
 <%@ include file="enum.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <div class="header">
 	<div class="row">
-		<ul class="nav nav-pills pull-right" id="topMenu" name="topMenu">
+		<ul class="nav nav-pills pull-right" id="topMenu">
 			<%
 				for (int i = 0; i < menuBars.length; i++) {
 					String m = menuBars[i];
@@ -11,20 +12,20 @@
 					if (m.equalsIgnoreCase(currentMenuBar))// check current tab
 					{
 			%>
-			<li class="active"><a href="<%=p%>.jsp" id="<%=m%>"><%=m%></a></li>
+			<li class="active"><a href="<%=p%>" id="<%=m%>"><%=m%></a></li>
 			<%
 				} else {
 			%>
-			<li><a href="<%=p%>.jsp" id="<%=m%>"><%=m%></a></li>
+			<li><a href="<%=p%>" id="<%=m%>"><%=m%></a></li>
 
 			<%
 				}
 				}
-			String loginUser = (String) session.getAttribute("isLogin");
+			String loginUser = (String) session.getAttribute("user");
 			if(loginUser!=null){
 			%>
 			<li>
-				<form action="jsp/login.jsp" method="post">
+				<form action="controller/login.jsp" method="post">
 					<button type="submit" class="btn btn-default" id="logout" name="logout">
 						<span class="glyphicon glyphicon-lock"></span> Logout
 					</button>
@@ -77,4 +78,26 @@
 		  
 	    
 </script>
+<%
+System.out.println(request.getServletPath());
+	if(!request.getServletPath().contains("index.jsp"))
+	{
+		 HttpServletResponse res = (HttpServletResponse) response;
+		//System.out.println(request.getServletPath());
+		if(session==null || session.getAttribute("user")==null)
+		{
+			%>
+<!-- 			<META HTTP-EQUIV=Refresh CONTENT="0; URL=index.jsp"> -->
+			<%
+ 			System.out.println("out");
+// 			String rootUrl = request.getRequestURL().toString();
+// 			rootUrl = rootUrl.replaceFirst(request.getServletPath(), "/index");
+// 			System.out.println(rootUrl);
+			//response.sendRedirect(rootUrl);
+			//response.sendRedirect( "/index" );
+			//res.sendRedirect(request.getContextPath() + "/index");
+			response.sendRedirect("http://localhost:8080/ResumeUploaderWeb/index.jsp");
+		}
+	}
+%>
 </html>

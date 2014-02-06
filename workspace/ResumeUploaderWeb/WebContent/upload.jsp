@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ include file="controller/controller.jsp" %> 
 <%
 //@author: nam phan
 //@company: Reliable{coders}

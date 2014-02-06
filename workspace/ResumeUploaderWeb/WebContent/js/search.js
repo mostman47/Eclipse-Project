@@ -96,7 +96,6 @@ function renderList(data, index, isNext) {
 	// object (not an 'array of one')
 	var result = "<thead><tr>" + "<th>#</th>" + "<th>First Name</th>"
 			+ "<th>Last Name</th>" + "<th>Email</th>" + "<th>Phone</th>"
-			+ "<th>Skills</th>" + "<th>Description</th>"
 			+ "<th>Resume URL</th>" + "</tr></thead>" + "<tbody id=\"result\">";
 	if (data.length === 0) {
 		result += "<td>No Result</td>";
@@ -108,12 +107,15 @@ function renderList(data, index, isNext) {
 				&& (i - j) < itemsEachPage; i++) {
 			index++;
 			var element = data[i];
-			result += "<tr>" + "<td>" + element.res_id + "</td>" + "<td>"
+			result += "<tr data-toggle=\"modal\" data-target=\"#myModal\">" 
+					+ "<td rowspan=\"2\">" + element.res_id + "</td>" + "<td>"
 					+ element.firstName + "</td>" + "<td>" + element.lastName
 					+ "</td>" + "<td>" + element.email + "</td>" + "<td>"
-					+ element.phone + "</td>" + "<td>" + element.skills
-					+ "</td>" + "<td>" + element.description + "</td>" + "<td>"
+					+ element.phone + "</td>" + "<td>"
 					+ element.res_URL + "</td>" + "</tr>";
+			result += "<tr><td colspan=\"3\"><strong>Skills: </strong>"+element.skills
+					+"</td><td colspan=\"2\"><strong>Description: </strong>"+element.description
+					+"</td></tr>";
 		}
 		index--;
 	}
@@ -125,3 +127,36 @@ function renderList(data, index, isNext) {
 	sessionStorage.setItem("currentIndex", index);
 	updatePager(data, index);
 }
+
+////JAX-RS serializes an empty list as null, and a 'collection of one' as an
+//// object (not an 'array of one')
+//var result = "<thead><tr>" + "<th>#</th>" + "<th>First Name</th>"
+//		+ "<th>Last Name</th>" + "<th>Email</th>" + "<th>Phone</th>"
+//		+ "<th>Skills</th>" + "<th>Description</th>"
+//		+ "<th>Resume URL</th>" + "</tr></thead>" + "<tbody id=\"result\">";
+//if (data.length === 0) {
+//	result += "<td>No Result</td>";
+//} else {
+//	if (!isNext) {
+//		index = index - (index % itemsEachPage==0?itemsEachPage:index % itemsEachPage) - itemsEachPage;
+//	}
+//	for (var i = index, j = index; i < data.length
+//			&& (i - j) < itemsEachPage; i++) {
+//		index++;
+//		var element = data[i];
+//		result += "<tr>" + "<td>" + element.res_id + "</td>" + "<td>"
+//				+ element.firstName + "</td>" + "<td>" + element.lastName
+//				+ "</td>" + "<td>" + element.email + "</td>" + "<td>"
+//				+ element.phone + "</td>" + "<td>" + element.skills
+//				+ "</td>" + "<td>" + element.description + "</td>" + "<td>"
+//				+ element.res_URL + "</td>" + "</tr>";
+//	}
+//	index--;
+//}
+//result += "</tbody>";
+//$('#resultTable').html(result);
+//$("#searchValue").focus();
+//
+//sessionStorage.setItem("localData", JSON.stringify(data));
+//sessionStorage.setItem("currentIndex", index);
+//updatePager(data, index);
