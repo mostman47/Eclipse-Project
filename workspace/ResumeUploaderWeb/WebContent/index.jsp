@@ -36,8 +36,8 @@
 					if (loginUser == null) {
 				%>
 				<div class="col-md-8 col-md-offset-3">
-					<form id="loginForm" class="form-horizontal" action="controller/login.jsp"
-						method="get">
+					<form id="loginForm" class="form-horizontal"
+						action="controller/login.jsp" method="get">
 						<div class="form-group">
 							<div class="col-sm-10">
 								<div class="input-group">
@@ -58,24 +58,16 @@
 								</div>
 							</div>
 						</div>
-
-						<%
-							String errorMessage = (String) session.getAttribute("error");
-								if (errorMessage != null) {
-						%>
 						<div class="form-group">
 							<div class="col-sm-10">
-								<p id="error" class="alert alert-warning alert-dismissable">
-									<small><%=errorMessage%></small>
-								</p>
-							</div>
-						</div>
-						<%
-							}
-						%>
-
-						<div class="form-group">
-							<div class="col-sm-10">
+								<%
+									String errorMessage = (String) session.getAttribute("error");
+										if (errorMessage != null) {
+								%>
+								<span id="error" class=" help-block"><small><%=errorMessage%></small></span>
+								<%
+									}
+								%>
 								<button type="submit" class="btn btn-default">Sign in</button>
 							</div>
 						</div>
@@ -91,9 +83,8 @@
 						</h1>
 					</div>
 					<div class="row">
-						<a href="upload"><button type="button"
-								class="btn btn-success">Upload</button></a> <a href="search"><button
-								type="button" class="btn btn-success">Search</button></a>
+						<a href="upload"><button type="button" class="btn btn-success">Upload</button></a>
+						<a href="search"><button type="button" class="btn btn-success">Search</button></a>
 					</div>
 				</div>
 				<%

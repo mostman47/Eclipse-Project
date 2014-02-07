@@ -16,7 +16,6 @@ public class ResumeObject {
 	private String skills;
 	private String description;
 	private String res_URL;
-	private File file;
 	public String getRes_id() {
 		return res_id;
 	}
@@ -79,14 +78,6 @@ public class ResumeObject {
 
 	public void setRes_URL(String res_URL) {
 		this.res_URL = res_URL;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
 	}
 
 }

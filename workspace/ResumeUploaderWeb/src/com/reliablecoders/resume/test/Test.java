@@ -24,7 +24,17 @@ public class Test {
 		//getLastInsertedID();
 		//searchResumeByID();
 		//testConnection();
-		testCreateDirectory();
+		//testCreateDirectory();
+		testDelete();
+	}
+	private static void testDelete() throws Exception {
+		ResumeObject rs = new ResumeObject();
+		rs.setRes_id("130");
+		ArrayList<ResumeObject> arr = new ArrayList<>();
+		arr.add(rs);
+		ProjectManager projectManager= new ProjectManager();
+		projectManager.deleteResumes(arr);
+		
 	}
 	private static void testCreateDirectory() throws IOException {
 		Properties prop = new Properties();

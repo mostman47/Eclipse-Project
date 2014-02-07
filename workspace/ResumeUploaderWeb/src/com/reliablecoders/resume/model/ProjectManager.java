@@ -2,6 +2,7 @@ package com.reliablecoders.resume.model;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.reliablecoders.resume.dao.Database;
 import com.reliablecoders.resume.dao.Project;
@@ -107,5 +108,33 @@ public class ProjectManager {
 		Connection connection = database.Get_Connection();
 		Project project = new Project();
 		return project.SearchResumeByID(connection, lastID);	}
+	/**
+	 * 
+	 * @param resumes
+	 * @return
+	 * @throws Exception
+	 */
+	public List<ResumeObject> deleteResumes(List<ResumeObject> resumes) throws Exception {
+		
+		ArrayList<ResumeObject> array = new ArrayList<>();
+		for(ResumeObject resume : resumes)
+		{
+			array.add(this.deleteResume(resume));
+		}
+		return array;
+		
+	}
+	/**
+	 * 
+	 * @param resume
+	 * @return
+	 * @throws Exception
+	 */
+	private ResumeObject deleteResume(ResumeObject resume) throws Exception {
+		Database database = new Database();
+		Connection connection = database.Get_Connection();
+		Project project = new Project();
+		return project.DeleteResumeByID(connection, resume);
+	}
 
 }

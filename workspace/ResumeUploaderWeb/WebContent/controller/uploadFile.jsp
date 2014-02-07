@@ -50,6 +50,7 @@
             int endPos = ((file.substring(0, boundaryLocation)).getBytes()).length;
             //write file to root
             saveFile = root + resumeObject.getRes_URL();;
+            System.out.println(saveFile);
             File ff = new File(saveFile);
             FileOutputStream fileOut = new FileOutputStream(ff);
             fileOut.write(dataBytes, startPos, (endPos - startPos));

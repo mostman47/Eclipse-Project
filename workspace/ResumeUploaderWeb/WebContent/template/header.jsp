@@ -44,7 +44,7 @@
 </div>
 <script>
 
-	var loginUser = <%=loginUser%>;
+	var loginUser = "<%=loginUser%>";
 	jQuery.fn.extend({
         disable: function(state) {
             return this.each(function() {
@@ -79,25 +79,25 @@
 	    
 </script>
 <%
-System.out.println(request.getServletPath());
-	if(!request.getServletPath().contains("index.jsp"))
-	{
-		 HttpServletResponse res = (HttpServletResponse) response;
-		//System.out.println(request.getServletPath());
-		if(session==null || session.getAttribute("user")==null)
-		{
+// System.out.println(request.getServletPath());
+// 	if(!request.getServletPath().contains("index.jsp"))
+// 	{
+// 		 HttpServletResponse res = (HttpServletResponse) response;
+// 		//System.out.println(request.getServletPath());
+// 		if(session==null || session.getAttribute("user")==null)
+// 		{
 			%>
 <!-- 			<META HTTP-EQUIV=Refresh CONTENT="0; URL=index.jsp"> -->
 			<%
- 			System.out.println("out");
-// 			String rootUrl = request.getRequestURL().toString();
-// 			rootUrl = rootUrl.replaceFirst(request.getServletPath(), "/index");
-// 			System.out.println(rootUrl);
-			//response.sendRedirect(rootUrl);
-			//response.sendRedirect( "/index" );
-			//res.sendRedirect(request.getContextPath() + "/index");
-			response.sendRedirect("http://localhost:8080/ResumeUploaderWeb/index.jsp");
-		}
-	}
+//  			System.out.println("out");
+// // 			String rootUrl = request.getRequestURL().toString();
+// // 			rootUrl = rootUrl.replaceFirst(request.getServletPath(), "/index");
+// // 			System.out.println(rootUrl);
+// 			//response.sendRedirect(rootUrl);
+// 			//response.sendRedirect( "/index" );
+// 			//res.sendRedirect(request.getContextPath() + "/index");
+// 			response.sendRedirect("http://localhost:8080/ResumeUploaderWeb/index.jsp");
+// 		}
+// 	}
 %>
 </html>

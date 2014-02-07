@@ -59,16 +59,13 @@
 					</div>
 				</div>
 				<div class="row marketing">
-					<div class="col-lg-12">
+					<div class="col-lg-6">
 						<label>Description*</label>
 
 						<textarea class="form-control" rows="3" id="description"
 							name="description" required></textarea>
 					</div>
-				</div>
-
-				<div class="row marketing">
-					<div class="col-lg-12">
+					<div class="col-lg-6">
 
 						<label>Resume*</label> <input type="file"
 							id="res_URL" name="res_URL" required>

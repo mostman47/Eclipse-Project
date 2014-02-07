@@ -16,53 +16,56 @@ function prepareUpload(event) {
 	files = event.target.files;
 }
 
-//submit form
-$('#uploadForm').submit(function(e){//check validation?
-    e.preventDefault();
-    //submit via ajax
-    addResume();
+// submit form
+$('#uploadForm').submit(function(e) {// check validation?
+	e.preventDefault();
+	// submit via ajax
+	addResume();
 	return false;
 });
 
 function addResume() {
-			$('html, body').css("cursor", "wait");
-			$('#resultSpan').empty();
-			$.ajax({
-				type : 'POST',
-				contentType : 'application/json',
-				url : rootURL + "/addResume",
-				dataType : "json",
-				data : formToJSON(),
-				success : function(data, textStatus, jqXHR) {
-					alert('Resume created successfully');
-					var data = new FormData();
-					data.append("file", files[0]);
-					$.ajax({//upload file
-						url : 'controller/uploadFile.jsp',
-						data : data,
-						cache : false,
-						contentType : false,
-						processData : false,
-						type : 'POST',
-						success : function(data) {
-							// alert(data);
-						}
-					});
-					//
-					$("#uploadForm")[0].reset();
-					$("#resultSpan").html('Resume created successfully');
-					$('html, body').animate({
-						scrollTop : 0
-					}, 'slow');
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert('addResume error: ' + textStatus + " " + errorThrown);
-				}
-			});
-			$('html, body').css("cursor", "auto");
+	$('html, body').css("cursor", "wait");
+	$('#resultSpan').empty();
+	$.ajax({
+		type : 'POST',
+		contentType : 'application/json',
+		url : rootURL + "/addResume",
+		dataType : "json",
+		data : formToJSON(),
+		success : function(data, textStatus, jqXHR) {
+			alert('Resume created successfully');
+			var data = new FormData();
+			data.append("file", files[0]);
+			//
+			uploadFile(data);
+			//
+			$("#uploadForm")[0].reset();
+			$("#resultSpan").html('Resume created successfully');
+			$('html, body').animate({
+				scrollTop : 0
+			}, 'slow');
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			alert('addResume error: ' + textStatus + " " + errorThrown);
+		}
+	});
+	$('html, body').css("cursor", "auto");
 }
 
-
+function uploadFile(data) {
+	$.ajax({// upload file
+		url : 'controller/uploadFile.jsp',
+		data : data,
+		cache : false,
+		contentType : false,
+		processData : false,
+		type : 'POST',
+		success : function(data) {
+			// alert(data);
+		}
+	});
+}
 function formToJSON() {
 	return JSON.stringify({
 		"firstName" : $('#firstName').val(),

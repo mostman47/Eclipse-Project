@@ -36,6 +36,7 @@
 						</table>
 						<ul id="pager" class="pager">
 							<li id="pagerPrevious"  class="previous disabled"><a href="#" >&larr; Older</a></li>
+							<li id="pagerDelete"><a href="#">Delete</a></li>
 							<li id="pagerNext" class="next disabled"><a href="#" >Newer &rarr;</a></li>
 						</ul>
 					</div>
@@ -55,6 +56,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="js/search.js"></script>
+<script src="js/update.js"></script>
 </body>
 
 </html>

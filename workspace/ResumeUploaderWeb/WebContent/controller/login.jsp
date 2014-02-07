@@ -25,7 +25,7 @@
 	else
 		if("POST".equalsIgnoreCase(request.getMethod()))
 		{
-			System.out.println("post");
+			//System.out.println("post");
 			if(request.getParameter("logout")!=null)
 			{
 				session.invalidate();
