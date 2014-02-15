@@ -4,7 +4,6 @@ package com.reliablecoders.resume.dto;
  * @company Reliable{coders}
  */
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.File;
 @XmlRootElement
 public class ResumeObject {
 

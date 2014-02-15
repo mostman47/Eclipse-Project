@@ -26,7 +26,7 @@
 			%>
 			<li>
 				<form action="controller/login.jsp" method="post">
-					<button type="submit" class="btn btn-default" id="logout" name="logout">
+					<button type="submit" class="btn btn-link" id="logout" name="logout">
 						<span class="glyphicon glyphicon-lock"></span> Logout
 					</button>
 				</form>
@@ -38,40 +38,27 @@
 	</div>
 	<div class="row">
 	<div class="col-md-3 col-md-offset-1">
-		<p class="text-muted nav pull-left">Resume Uploader</p>
+		<p class="text-muted nav pull-left"><a href="index.jsp">Resume Uploader</a></p>
 		</div>
 	</div>
 </div>
 <script>
 
 	var loginUser = "<%=loginUser%>";
-	jQuery.fn.extend({
-        disable: function(state) {
-            return this.each(function() {
-                var $this = $(this);
-                $this.toggleClass('disabled', state);
-            });
-        }
-    });
-	if(loginUser === null)
+	if(loginUser == "null")
 		{
 			//$("#logout").addClass("disabled");
 			$("#topMenu li").each(function(){
 				$(this).addClass("disabled");
 			});
-		    
-		    $('a#Upload').disable(true);
-		    $('a#Search').disable(true);
-		    
-		    
 		}
-	else
-		{
-			//$("#logout").removeClass("disabled");
-			$("#topMenu li").each(function(){
-				$(this).removeClass("disabled");
-			});
-		};
+// 	else
+// 		{
+// 			//$("#logout").removeClass("disabled");
+// 			$("#topMenu li").each(function(){
+// 				$(this).removeClass("disabled");
+// 			});
+// 		};
 		$('body').on('click', 'a.disabled', function(event) {
 	        event.preventDefault();
 	    });

@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ include file="controller/controller.jsp" %> 
+<%@ include file="controller/controller.jsp"%>
 <%
-//@author: nam phan
-//@company: Reliable{coders}
+	//@author: nam phan
+	//@company: Reliable{coders}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,33 +18,30 @@
 
 		<form id="uploadForm" name="uploadForm" method="post">
 
-			<span id="resultSpan" class="label label-success" ></span>
+			<span id="resultSpan" class="label label-success"></span>
 			<blockquote>
 				<strong>Personal Information</strong>
 				<div class="row marketing">
 					<div class="col-lg-6">
-						<label>First Name*</label> <input type="text"
-							class="form-control" id="firstName" name="firstName"
-							placeholder="first-name" required>
+						<label>First Name*</label> <input type="text" class="form-control"
+							id="firstName" name="firstName" placeholder="first-name" required>
 					</div>
 					<div class="col-lg-6">
-						<label>Last Name*</label> <input type="text"
-							class="form-control" id="lastName" name="lastName"
-							placeholder="last-name" required>
+						<label>Last Name*</label> <input type="text" class="form-control"
+							id="lastName" name="lastName" placeholder="last-name" required>
 					</div>
 				</div>
 				<div class="row marketing">
 					<div class="col-lg-6">
-						<label>Email*</label> <input type="email"
-							class="form-control" id="email" name="email"
-							placeholder="Email" required>
+						<label>Email*</label> <input type="email" class="form-control"
+							id="email" name="email" placeholder="Email" required>
 					</div>
 					<div class="col-lg-6">
-						<label>Phone*</label> <input type='tel'
-							class="form-control" id="phone" name="phone"
-							placeholder="111-111-1111" required pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+						<label>Phone*</label> <input type='tel' class="form-control"
+							id="phone" name="phone" placeholder="111-111-1111" required
+							pattern="\d{3}[\-]\d{3}[\-]\d{4}"
 							oninvalid="setCustomValidity('Required. PLease match: ###-###-####')"
-    						onchange="try{setCustomValidity('')}catch(e){}">
+							onchange="try{setCustomValidity('')}catch(e){}">
 					</div>
 				</div>
 			</blockquote>
@@ -66,9 +63,8 @@
 							name="description" required></textarea>
 					</div>
 					<div class="col-lg-6">
-
-						<label>Resume*</label> <input type="file"
-							id="res_URL" name="res_URL" required>
+						<label>Resume*</label> <input type="file" id="res_URL"
+							name="res_URL" required>
 					</div>
 
 				</div>
@@ -94,7 +90,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 
-<script src="js/upload.js"></script>
+	<script src="js/upload.js"></script>
 </body>
 
 </html>

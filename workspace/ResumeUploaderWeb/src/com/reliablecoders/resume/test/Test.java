@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.google.gson.Gson;
 import com.reliablecoders.resume.dao.Database;
 import com.reliablecoders.resume.dto.ResumeObject;
@@ -15,6 +17,7 @@ import com.reliablecoders.resume.model.ProjectManager;
  * @company Reliable{coders}
  */
 public class Test {
+	private static HttpServletRequest servletRequest;
 	public static void main(String[] args) throws Exception {
 		//getResume();
 		//addResume();
@@ -25,12 +28,15 @@ public class Test {
 		//searchResumeByID();
 		//testConnection();
 		//testCreateDirectory();
-		testDelete();
+		//testDelete();
+		System.out.println(servletRequest.getSession().getServletContext().getRealPath("/"));
+		System.out.println(System.getProperty("user.dir"));
+		
 	}
 	private static void testDelete() throws Exception {
 		ResumeObject rs = new ResumeObject();
-		rs.setRes_id("130");
-		ArrayList<ResumeObject> arr = new ArrayList<>();
+		rs.setRes_id("170");
+		ArrayList<ResumeObject> arr = new ArrayList<ResumeObject>();
 		arr.add(rs);
 		ProjectManager projectManager= new ProjectManager();
 		projectManager.deleteResumes(arr);

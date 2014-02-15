@@ -75,7 +75,6 @@ public class ProjectManager {
 	 */
 	public ResumeObject updateResume(ResumeObject resumeObject) throws Exception {
 		try {
-			System.out.println(resumeObject.getRes_id());
 			Database database = new Database();
 			Connection connection = database.Get_Connection();
 			Project project = new Project();
@@ -116,7 +115,7 @@ public class ProjectManager {
 	 */
 	public List<ResumeObject> deleteResumes(List<ResumeObject> resumes) throws Exception {
 		
-		ArrayList<ResumeObject> array = new ArrayList<>();
+		ArrayList<ResumeObject> array = new ArrayList<ResumeObject>();
 		for(ResumeObject resume : resumes)
 		{
 			array.add(this.deleteResume(resume));
@@ -135,6 +134,19 @@ public class ProjectManager {
 		Connection connection = database.Get_Connection();
 		Project project = new Project();
 		return project.DeleteResumeByID(connection, resume);
+	}
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 * @throws Exception 
+	 * @throws NumberFormatException 
+	 */
+	public ResumeObject SearchByID(String id) throws NumberFormatException, Exception {
+		Database database = new Database();
+		Connection connection = database.Get_Connection();
+		Project project = new Project();
+		return project.SearchResumeByID(connection, Integer.parseInt(id));
 	}
 
 }

@@ -18,8 +18,8 @@
 
 		    String saveFile = "";
 			String root = prop.getProperty("rootDirectory");
-			if(!root.endsWith("\\"))
-				root += "\\";
+// 			if(!root.endsWith("\\"))
+// 				root += "\\";
 			//check file input
 		    String contentType = request.getContentType();
 		    if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) {
@@ -49,9 +49,13 @@
             int startPos = ((file.substring(0, pos)).getBytes()).length;
             int endPos = ((file.substring(0, boundaryLocation)).getBytes()).length;
             //write file to root
+            
             saveFile = root + resumeObject.getRes_URL();;
+            System.out.println(new java.io.File("").getParent());
+            System.out.println(System.getProperty("user.dir"));
             System.out.println(saveFile);
             File ff = new File(saveFile);
+            System.out.println(ff.getAbsolutePath());
             FileOutputStream fileOut = new FileOutputStream(ff);
             fileOut.write(dataBytes, startPos, (endPos - startPos));
             fileOut.flush();

@@ -7,7 +7,13 @@
 <html lang="en">
 <head>
 <jsp:include page="template/head.jsp" />
+<script>
+	$(document).ready(function() {
+		$("#username").focus();
+	});
+</script>
 </head>
+
 <body>
 
 
@@ -35,7 +41,7 @@
 					String loginUser = (String) session.getAttribute("user");
 					if (loginUser == null) {
 				%>
-				<div class="col-md-8 col-md-offset-3">
+				<div class="col-md-6 col-md-offset-3">
 					<form id="loginForm" class="form-horizontal"
 						action="controller/login.jsp" method="get">
 						<div class="form-group">
@@ -46,9 +52,7 @@
 										name="username">
 								</div>
 							</div>
-
 						</div>
-
 						<div class="form-group">
 							<div class="col-sm-10">
 								<div class="input-group">

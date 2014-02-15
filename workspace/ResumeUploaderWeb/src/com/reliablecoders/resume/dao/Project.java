@@ -1,7 +1,10 @@
 package com.reliablecoders.resume.dao;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import com.reliablecoders.resume.dto.ResumeObject;
 
@@ -34,7 +37,8 @@ public class Project {
 				+ value + "%' " + "OR Phone LIKE '%" + value + "%' "
 				+ "OR Skills LIKE '%" + value + "%' "
 				+ "OR Description LIKE '%" + value + "%' "
-				+ "OR Resume_Directory LIKE '%" + value + "%' " + "ORDER BY id DESC";
+				+ "OR Resume_Directory LIKE '%" + value + "%' "
+				+ "ORDER BY id DESC";
 		return doQueryGetResume(connection, query);
 	}
 
@@ -62,19 +66,19 @@ public class Project {
 			throws SQLException {
 		ArrayList<ResumeObject> resumeData = new ArrayList<ResumeObject>();
 		while (rs.next()) {
-			
+
 			resumeData.add(parseResumeObj(rs));
 		}
 		return resumeData;
 	}
+
 	/**
 	 * 
 	 * @param rs
 	 * @return
 	 * @throws SQLException
 	 */
-	private ResumeObject parseResumeObj(ResultSet rs) throws SQLException
-	{
+	private ResumeObject parseResumeObj(ResultSet rs) throws SQLException {
 		ResumeObject resumeObject = new ResumeObject();
 		resumeObject.setRes_id(rs.getString("ID"));
 		resumeObject.setFirstName(rs.getString("First_Name"));
@@ -85,8 +89,9 @@ public class Project {
 		resumeObject.setDescription(rs.getString("Description"));
 		resumeObject.setRes_URL(rs.getString("Resume_Directory"));
 		return resumeObject;
-		
+
 	}
+
 	/**
 	 * 
 	 * @param resumeObject
@@ -110,9 +115,14 @@ public class Project {
 		ps.setString(5, resumeObject.getSkills());
 		ps.setString(6, resumeObject.getDescription());
 		String resURL = resumeObject.getRes_URL();
-		resURL = resURL
-				.substring(resURL.lastIndexOf("\\") + 1, resURL.length());
-		resURL = resumeObject.getEmail() + "_" + resURL;
+		// resURL = resURL
+		// .substring(resURL.lastIndexOf("\\") + 1, resURL.length());
+		// resURL = resURL
+		// .substring(resURL.lastIndexOf("/") + 1, resURL.length());
+		// resURL = resumeObject.getEmail() + "_" + resURL;
+		resURL = resumeObject.getLastName() + "_" + resumeObject.getEmail()
+				+ resURL.substring(resURL.lastIndexOf("."), resURL.length());
+		resumeObject.setRes_URL(resURL);
 		ps.setString(7, resURL);
 
 		ps.executeUpdate();
@@ -155,13 +165,57 @@ public class Project {
 		ps.setString(4, resumeObject.getPhone());
 		ps.setString(5, resumeObject.getSkills());
 		ps.setString(6, resumeObject.getDescription());
-		ps.setString(7, resumeObject.getRes_URL());
+		ResumeObject oldResumeObject = this.SearchResumeByID(connection,
+				Integer.parseInt(resumeObject.getRes_id()));
+		String resURL = resumeObject.getRes_URL();
+		if (!resURL.isEmpty()) {
+			deleteFile(oldResumeObject.getRes_URL());
+			// resURL = resURL.substring(resURL.lastIndexOf("\\") + 1,
+			// resURL.length());
+			// resURL = resURL
+			// .substring(resURL.lastIndexOf("/") + 1, resURL.length());
+			// resURL = resumeObject.getEmail() + "_" + resURL;
+			resURL = resumeObject.getLastName()
+					+ "_"
+					+ resumeObject.getEmail()
+					+ resURL.substring(resURL.lastIndexOf("."), resURL.length());
+		}
+		resumeObject.setRes_URL(resURL);
+		ps.setString(7, resURL);
 		ps.setString(8, resumeObject.getRes_id());
 
 		ps.executeUpdate();
 
 		connection.close();
 		return resumeObject;
+	}
+
+	private void deleteFile(String res_URL) {
+		Properties prop = new Properties();
+		try {
+			prop.load(Thread.currentThread().getContextClassLoader()
+					.getResourceAsStream("config.properties"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String root = prop.getProperty("rootDirectory");
+		try {
+
+			File file = new File(root + res_URL);
+			if (file.exists()) {
+				if (file.delete()) {
+					System.out.println(file.getName() + " is deleted!");
+				} else {
+					System.out.println("Delete operation is failed.");
+				}
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
 	}
 
 	/**
@@ -192,13 +246,14 @@ public class Project {
 		String query = "SELECT * FROM resume WHERE ID = " + lastID;
 		return doQueryGetResume(connection, query).get(0);
 	}
-/**
- * 
- * @param connection
- * @param resume
- * @return
- * @throws Exception 
- */
+
+	/**
+	 * 
+	 * @param connection
+	 * @param resume
+	 * @return
+	 * @throws Exception
+	 */
 	public ResumeObject DeleteResumeByID(Connection connection,
 			ResumeObject resume) throws Exception {
 		String query = "DELETE FROM resume WHERE ID = " + resume.getRes_id();

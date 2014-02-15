@@ -3,7 +3,7 @@
  * @company Reliable{coders}
  */
 // The root URL for the RESTful services
-var rootURL = "http://localhost:8080/ResumeUploaderWeb/rest/Web";
+var webServiceRootURL = sessionStorage.getItem("webServiceRootURL");
 
 // Variable to store your files
 var files;
@@ -30,18 +30,21 @@ function addResume() {
 	$.ajax({
 		type : 'POST',
 		contentType : 'application/json',
-		url : rootURL + "/addResume",
+		url : webServiceRootURL + "/addResume",
 		dataType : "json",
 		data : formToJSON(),
 		success : function(data, textStatus, jqXHR) {
-			alert('Resume created successfully');
-			var data = new FormData();
-			data.append("file", files[0]);
+			//alert('Resume created successfully');
 			//
-			uploadFile(data);
+			var dt = new FormData();
+			dt.append("file", files[0]);
+			dt.append("fileName",data.res_URL);
+			//
+			uploadFile(dt);
 			//
 			$("#uploadForm")[0].reset();
 			$("#resultSpan").html('Resume created successfully');
+			$("#firstName").focus();
 			$('html, body').animate({
 				scrollTop : 0
 			}, 'slow');
@@ -55,15 +58,18 @@ function addResume() {
 
 function uploadFile(data) {
 	$.ajax({// upload file
-		url : 'controller/uploadFile.jsp',
+		url : 'uploadFile',
 		data : data,
 		cache : false,
 		contentType : false,
 		processData : false,
 		type : 'POST',
 		success : function(data) {
-			// alert(data);
-		}
+			//alert("File uploaded successfully");
+		},
+	error:  function(jqXHR, textStatus, errorThrown){
+		alert('Upload file error: ' + textStatus + " " + errorThrown);
+	}
 	});
 }
 function formToJSON() {

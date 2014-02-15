@@ -30,7 +30,6 @@ public class LoginFilter implements Filter {
 
         if (session == null || session.getAttribute("user") == null) {
         	System.out.println("not login yet");
-        	//System.out.println(request.getContextPath() + "/index");
             response.sendRedirect(request.getContextPath() + "/index"); // No logged-in user found, so redirect to login page.
             
         } else {
